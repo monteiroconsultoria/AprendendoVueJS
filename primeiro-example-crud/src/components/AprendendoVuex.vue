@@ -104,12 +104,12 @@
                     </tr>
                 </thead>
                 <tbody v-show="mostraLista">
-                    <tr v-for="pessoa in pessoas" :key="pessoa.id">
-                        <td>{{pessoa.id}}</td>
-                        <td class="texto-esquerda">{{pessoa.nome}}</td>
-                        <td>{{pessoa.idade}}</td>
-                        <td class="texto-esquerda oculta">{{pessoa.email}}</td>
-                        <td class="oculta">{{pessoa.telefone}}</td>
+                    <tr v-for="pessoa in pessoas" :key="pessoa.id" >
+                        <td @click="ver(pessoa)">{{pessoa.id}}</td>
+                        <td @click="ver(pessoa)" class="texto-esquerda">{{pessoa.nome}}</td>
+                        <td @click="ver(pessoa)">{{pessoa.idade}}</td>
+                        <td @click="ver(pessoa)" class="texto-esquerda oculta">{{pessoa.email}}</td>
+                        <td @click="ver(pessoa)" class="oculta">{{pessoa.telefone}}</td>
                         <td>
                             <a href="#" @click="editar(pessoa),mostraLista=!mostraLista"><font-awesome-icon icon="user-edit" /><span class="oculta">
                                  Editar</span>
