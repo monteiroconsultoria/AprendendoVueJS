@@ -6,11 +6,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     pessoas: [
-      { id: 1, nome:'Paulo Eduardo Monteiro',email:'monteiroconsultoria.paulo@gmail.com',telefone:'(51)3933-7954', idade: 32},
-      { id: 2, nome:'Maria da Silva',email:'mariasilva@maria.com',telefone:'(51)3933-7954', idade: 72},
-      { id: 3, nome:'João da Silva Marciano',email:'joaosilva@joao.com',telefone:'(51)3933-7954', idade: 69},
-      { id: 4, nome:'Marcos Alberto Pereira',email:'marcos@marcos.com',telefone:'(51)3933-7954', idade: 41},
-      { id: 5, nome:'Juca Bala',email:'jucabala@juca.com',telefone:'(51)3933-7954', idade: 17},
+      { id: 1, nome:'Paulo Eduardo Monteiro',email:'monteiroconsultoria.paulo@gmail.com',telefone:'5139337954',celular:'51985448407', idade: 32},
+      { id: 2, nome:'Maria da Silva',email:'mariasilva@maria.com',telefone:'5139337954',celular:'51985448407', idade: 72},
+      { id: 3, nome:'João da Silva Marciano',email:'joaosilva@joao.com',telefone:'5139337954',celular:'51985448407', idade: 69},
+      { id: 4, nome:'Marcos Alberto Pereira',email:'marcos@marcos.com',telefone:'5139337954',celular:'51985448407', idade: 41},
+      { id: 5, nome:'Juca Bala',email:'jucabala@juca.com',telefone:'5139337954',celular:'51985448407', idade: 17},
     ]  
   },
   mutations: {

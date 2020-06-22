@@ -16,7 +16,11 @@
             </div>
             <div class="linha form-linha">
                 <label for="telefone">Telefone:</label>
-                <input type="text" id="telefone" v-model="pessoa.telefone">
+                <input type="text" id="telefone" :value="pessoa.telefone | telefone">
+            </div>
+            <div class="linha form-linha">
+                <label for="celular">Celular:</label>
+                <input type="text" id="celular" :value="pessoa.celular | telefone">
             </div>
             <div class="linha form-linha">
                 <label for="idade">Idade:</label>
@@ -51,7 +55,11 @@
             </div>
             <div class="linha form-linha">
                 <label for="telefone">Telefone:</label>
-                <input type="text" id="telefone" v-model="pessoa.telefone">
+                <input type="text" id="telefone" v-mask="'(##) ####-####'" v-model="pessoa.telefone">
+            </div>
+            <div class="linha form-linha">
+                <label for="celular">Celular:</label>
+                <input type="text" id="celular" v-mask="'(##) #####-####'" v-model="pessoa.celular">
             </div>
             <div class="linha form-linha">
                 <label for="idade">Idade:</label>
@@ -100,6 +108,7 @@
                         <th>Idade</th>
                         <th class="oculta">E-mail</th>
                         <th class="oculta">Telefone</th>
+                        <th class="oculta">Celular</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -109,7 +118,8 @@
                         <td @click="ver(pessoa)" class="texto-esquerda">{{pessoa.nome}}</td>
                         <td @click="ver(pessoa)">{{pessoa.idade}}</td>
                         <td @click="ver(pessoa)" class="texto-esquerda oculta">{{pessoa.email}}</td>
-                        <td @click="ver(pessoa)" class="oculta">{{pessoa.telefone}}</td>
+                        <td @click="ver(pessoa)" class="oculta">{{ pessoa.telefone | telefone }}</td>
+                        <td @click="ver(pessoa)" class="oculta">{{ pessoa.celular | telefone }}</td>
                         <td>
                             <a href="#" @click="editar(pessoa),mostraLista=!mostraLista"><font-awesome-icon icon="user-edit" /><span class="oculta">
                                  Editar</span>
@@ -152,7 +162,25 @@
 //import { mapState } from 'vuex'
 export default {
     name: 'AprendendoVuex',
+    filters: {
+        telefone(fone){
+            fone = `${fone}`.replace(/\D/g, "");
+            fone = fone.replace(/^(\d\d)(\d)/g, "($1) $2");
+
+            if (fone.length < 14) {
+                fone = fone.replace(/(\d{4})(\d)/, "$1-$2");
+            } else {
+                
+                fone = fone.replace(/(\d{5})(\d)/, "$1-$2");
+            }   
+            return fone;
+            
+            //return fone.replace(/\D/g,'').length === 11 ? '(##) 00000-0000' : '(##) 0000-00009'
+            
+        }
+    },
     computed: {
+        
         style() {
             return 'centro cabecalho rodape'
         },
@@ -166,7 +194,8 @@ export default {
             id:'',
             pessoa:{},
             disabled:true,
-            mostraLista:false
+            mostraLista:false,
+            maskTelefone:''
         }
     },
     methods: {
@@ -184,6 +213,15 @@ export default {
             this.id = pessoa.id
             this.pessoa = {...pessoa}
             this.disabled = false
+            
+            if (this.pessoa.telefone.length < 11) {
+                this.maskTelefone='(##) ####-####'
+                
+            } else {
+                this.maskTelefone='(##) #####-####'
+                
+            }
+            
             
         },
         ver(pessoa) {
@@ -216,7 +254,7 @@ export default {
                         arrayCodigo += [this.$store.state.pessoas[c].id]
                         
                     }
-                    console.log(Math.max(...arrayCodigo) + 1)
+                    
                     return Math.max(...arrayCodigo) + 1
                 }else{
                     return 1
