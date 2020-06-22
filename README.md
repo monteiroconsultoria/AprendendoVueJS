@@ -1,4 +1,4 @@
-# VueJS-My-Simple-Examples
+# VueJS-My-Examples
  Repository created for pratice of the learning using Framework Vue.Js
 
 # primeiro-example-crud
